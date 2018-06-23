@@ -29,11 +29,11 @@ import static Controllers.security.UserSessionController.idMedecin;
  * Created by amjad on 12/06/2018.
  */
 @Named(value = "agendaController")
-    @ViewScoped
-    public class AgendaController implements Serializable {
+@ViewScoped
+public class AgendaController implements Serializable {
     private ScheduleModel eventModel;
 
-    private Medecin medecin=new Medecin();
+    private Medecin medecin = new Medecin();
     private ScheduleModel lazyEventModel;
 
     private List<Agenda> agendaList;
@@ -42,12 +42,13 @@ import static Controllers.security.UserSessionController.idMedecin;
     private IAgendaDAO iAgendaDAO;
     @EJB
     private IMedecinDAO iMedecinDAO;
+
     @PostConstruct
     public void init() {
         eventModel = new DefaultScheduleModel();
-        agendaList=iAgendaDAO.allAgendaMedecin(idMedecin);
+        agendaList = iAgendaDAO.allAgendaMedecin(idMedecin);
 
-        for (int i=0;i<agendaList.size();i++){
+        for (int i = 0; i < agendaList.size(); i++) {
             eventModel.addEvent(agendaList.get(i));
         }
 
@@ -73,7 +74,7 @@ import static Controllers.security.UserSessionController.idMedecin;
     public Date getRandomDate(Date base) {
         Calendar date = Calendar.getInstance();
         date.setTime(base);
-        date.add(Calendar.DATE, ((int) (Math.random()*30)) + 1);    //set random day of month
+        date.add(Calendar.DATE, ((int) (Math.random() * 30)) + 1);    //set random day of month
 
         return date.getTime();
     }
@@ -99,6 +100,7 @@ import static Controllers.security.UserSessionController.idMedecin;
 
         return calendar;
     }
+
     private Date previousDay8Pm() {
         Calendar t = (Calendar) today().clone();
         t.set(Calendar.AM_PM, Calendar.PM);
@@ -178,20 +180,19 @@ import static Controllers.security.UserSessionController.idMedecin;
     }
 
     public void addEvent(ActionEvent actionEvent) {
-        if(event.getId() == null) {
+        if (event.getId() == null) {
             eventModel.addEvent(event);
-            Agenda agenda=(Agenda)event;
+            Agenda agenda = (Agenda) event;
 
 
-          iAgendaDAO.create(agenda);
-            System.out.println("Medecinfgf "+idMedecin+" "+agenda.getTitle());
+            iAgendaDAO.create(agenda);
+            System.out.println("Medecinfgf " + idMedecin + " " + agenda.getTitle());
 
-            iAgendaDAO.updateAgendaMedecin(idMedecin,agenda.getTitle());
-        }
-        else {
+            iAgendaDAO.updateAgendaMedecin(idMedecin, agenda.getTitle());
+        } else {
             eventModel.updateEvent(event);
-            Agenda agenda=(Agenda)event;
-            medecin=iMedecinDAO.find(idMedecin);
+            Agenda agenda = (Agenda) event;
+            medecin = iMedecinDAO.find(idMedecin);
             agenda.getMedecin().setIdMedecin(idMedecin);
             iAgendaDAO.edit(agenda);
         }
