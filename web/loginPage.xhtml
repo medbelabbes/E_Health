@@ -1,0 +1,79 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xmlns:p="http://primefaces.org/ui"
+>
+
+<h:head>
+    <meta charset="UTF-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <!--<h:outputStylesheet library="plugins" name="bootstrap/css/bootstrap.css"/>-->
+    <!--<h:outputStylesheet library="plugins" name="font-awesome/css/font-awesome.css"/>-->
+    <!--<h:outputStylesheet library="css" name="login.css"/>-->
+    <f:facet name="last">
+
+        <link type="text/css" rel="stylesheet" href="resources/plugins/bootstrap/css/bootstrap.css"/>
+        <link type="text/css" rel="stylesheet" href="resources/font-awesome/css/font-awesome.css"/>
+        <link type="text/css" rel="stylesheet" href="resources/css/login.css"/>
+
+    </f:facet>
+
+</h:head>
+
+<h:body>
+
+    <div class="container">
+        <div class="row">
+
+            <div class="col-md-offset-7 col-md-5 ">
+
+                <ui:include src="views/auth/LogInForm.xhtml"/>
+
+            </div>
+        </div>
+
+    </div>
+    <div class="footer navbar-fixed-bottom">
+        <div class="foot1">
+
+            <h:panelGroup>
+                <p:commandLink value="©#{loginLayoutController.year} DevSoft.com, Inc." icon="Esi-Sba_Logo.jpg"
+                               onclick="PF('dlg3').show();"/>
+
+                <p:dialog header="Les information de l'équipe de developement" widgetVar="dlg3"
+                          showEffect="explode"
+                          hideEffect="explode" height="300">
+                    <div align="center">
+                        <img class="icon" src="resources/images/e-health_logo_background_white_192x124.png" alt="Icon"/>
+
+                        <div class="alert alert-info">
+                            <strong>L'équipe</strong> <br/>
+
+                            - YAHIAOUI ABDELKADER<br/>
+                            - PIKSO<br/>
+                            - AYMEN<br/>
+
+
+                            <strong>L'encadrement</strong> <br/>
+                            - ABDELHAMID MALKI<br/><br/>
+                            <strong>Collaboration avec</strong><br/>
+                            <a href="http://www.esi-sba.dz/fr">
+                                <img width="35px" class="icon"  src="resources/images/Esi-Sba_Logo.jpg"
+                                     alt="Icon"/>
+                            </a>
+                        </div>
+
+                    </div>
+                </p:dialog>
+            </h:panelGroup>
+        </div>
+    </div>
+
+
+</h:body>
+</html>

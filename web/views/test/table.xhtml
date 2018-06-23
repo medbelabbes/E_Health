@@ -1,0 +1,85 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:jsf="http://xmlns.jcp.org/jsf"
+      xmlns:p="http://primefaces.org/ui">
+<h:head>
+</h:head>
+<h:body>
+<h:form>
+
+    <!--<p:dataTable id="singleDT3" var="etd" value="#{medecinController.patientListe}"  >-->
+    <!--<f:facet name="header">-->
+        <!--List des etudiants qui ont aucune absences-->
+    <!--</f:facet>-->
+    <!--</p:dataTable>-->
+    <p:dataTable id="tableStateDT" var="patient" value="#{medecinController.patientListe}" widgetVar="patientsTable" multiViewState="true"
+                     rows="10" paginator="true"
+                     paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                     rowsPerPageTemplate="5,10,15"
+                     selectionMode="single" selection="#{medecinController.selectedPatient}" rowKey="#{patient.idPatient}"
+                     emptyMessage="No patients found with given criteria" filteredValue="#{medecinController.filteredPatients}">
+            <f:facet name="header">
+                <p:outputPanel>
+                    <h:outputText value="Search all fields:" />
+                    <p:inputText id="globalFilter" onkeyup="PF('patientsTable').filter()" style="width:150px" placeholder="Enter keyword"/>
+
+                </p:outputPanel>
+                   </f:facet>
+
+            <!--<p:ajax event="rowSelect" update=":form:patientDetail" oncomplete="PF('patientDialog').show()" />-->
+
+            <p:column headerText="Id" filterBy="#{patient.idPatient}" sortBy="#{patient.idPatient}" filterMatchMode="contains">
+                <h:outputText value="#{patient.idPatient}" />
+            </p:column>
+
+            <p:column headerText="Date naissance" filterBy="#{patient.dateNaissance}" sortBy="#{patient.dateNaissance}" filterMatchMode="startsWith">
+                <h:outputText value="#{patient.dateNaissance}" />
+            </p:column>
+
+            <p:column headerText="Email" filterBy="#{patient.email}" sortBy="#{patient.email}" filterMatchMode="exact">
+                <!--<f:facet name="filter">-->
+                    <!--<p:selectOneMenu onchange="PF('patientsTable').filter()" style="width:100px;" >-->
+                        <!--<f:selectItem itemLabel="Select One" itemValue="#{null}" noSelectionOption="true" />-->
+                        <!--<f:selectItems value="#{dtTableStateView.brands}" />-->
+                    <!--</p:selectOneMenu>-->
+                <!--</f:facet>-->
+                <h:outputText value="#{patient.email}" />
+            </p:column>
+
+            <!--<p:column headerText="lieu naissance" filterBy="#{patient.lieuNaissance}" sortBy="#{patient.lieuNaissance}" filterMatchMode="in">-->
+                <!--&lt;!&ndash;<f:facet name="filter">&ndash;&gt;-->
+                    <!--&lt;!&ndash;<p:selectCheckboxMenu label="Colors" onchange="PF('patientsTable').filter()" style="width:80px;" panelStyle="width:125px" scrollHeight="150">&ndash;&gt;-->
+                        <!--&lt;!&ndash;<f:selectItems value="#{dtTableStateView.colors}" />&ndash;&gt;-->
+                    <!--&lt;!&ndash;</p:selectCheckboxMenu>&ndash;&gt;-->
+                <!--&lt;!&ndash;</f:facet>&ndash;&gt;-->
+                <!--<h:outputText value="#{patient.lieuNaissance}" />-->
+            <!--</p:column>-->
+        </p:dataTable>
+
+        <p:dialog header="patient Info" widgetVar="patientDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
+            <p:outputPanel id="patientDetail" style="text-align:center;">
+                <p:panelGrid  columns="2" rendered="#{not empty medecinController.selectedPatient}" columnClasses="label,value">
+                    <f:facet name="header">
+                        <!--<p:graphicImage name="demo/images/patient/#{medecinController.selectedpatient.brand}-big.gif"/>-->
+                    </f:facet>
+
+                    <h:outputText value="Id:" />
+                    <h:outputText value="#{medecinController.selectedPatient.idPatient}" />
+
+                    <h:outputText value="Email" />
+                    <h:outputText value="#{medecinController.selectedPatient.email}" />
+
+                    <h:outputText value="Date Naissance" />
+                    <h:outputText value="#{medecinController.selectedPatient.dateNaissance}" />
+
+                    <h:outputText value="lieu Naissance:" />
+                    <h:outputText value="#{medecinController.selectedPatient.lieuNaissance}"/>
+                </p:panelGrid>
+            </p:outputPanel>
+        </p:dialog>
+
+</h:form>
+</h:body>
+        </html>

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence xmlns="http://xmlns.jcp.org/xml/ns/persistence" version="2.1">
+
+    <persistence-unit name="E_HealthPersistenceUnit">
+        <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+        <class>Entities.Administrateur</class>
+        <class>Entities.Adresse</class>
+        <class>Entities.Choix</class>
+        <class>Entities.Compte</class>
+        <class>Entities.Consigne</class>
+        <class>Entities.DossierMedical</class>
+        <class>Entities.Medecin</class>
+        <class>Entities.Medicament</class>
+        <class>Entities.ModeleChoix</class>
+        <class>Entities.ModeleQuestion</class>
+        <class>Entities.Operation</class>
+        <class>Entities.Patient</class>
+        <class>Entities.PostOperation</class>
+        <class>Entities.PreOperation</class>
+        <class>Entities.Question</class>
+        <class>Entities.Service</class>
+        <class>Entities.TraitementActuel</class>
+        <class>Entities.ModeleQuestionnaire</class>
+        <class>Entities.Questionnaire</class>
+        <class>Entities.Keys.KeyDossierMedical</class>
+        <class>Entities.Keys.KeyModeleQuestionnaire</class>
+        <class>Entities.Keys.KeyQuestionnaire</class>
+        <class>Entities.KeyModeleQuestionnaire2</class>
+        <properties>
+            <property name="hibernate.connection.url" value="jdbc:mysql://localhost:3306/E_HealthDB"/>
+            <property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver"/>
+            <property name="hibernate.connection.username" value="root"/>
+            <property name="hibernate.connection.password" value="root"/>
+            <property name="hibernate.archive.autodetection" value="class"/>
+            <property name="hibernate.show_sql" value="true"/>
+            <property name="hibernate.format_sql" value="true"/>
+            <property name="hibernate.hbm2ddl.auto" value="update"/>
+        </properties>
+    </persistence-unit>
+    <persistence-unit name="E_HealthPersistenceUnit2" transaction-type="JTA">
+        <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+        <jta-data-source>jdbc/E_HealthDB</jta-data-source>
+        <class>Entities.Administrateur</class>
+        <class>Entities.Adresse</class>
+        <class>Entities.Choix</class>
+        <class>Entities.Compte</class>
+        <class>Entities.Consigne</class>
+        <class>Entities.DossierMedical</class>
+        <class>Entities.Medecin</class>
+        <class>Entities.Medicament</class>
+        <class>Entities.ModeleChoix</class>
+        <class>Entities.ModeleQuestion</class>
+        <class>Entities.Operation</class>
+        <class>Entities.Patient</class>
+        <class>Entities.PostOperation</class>
+        <class>Entities.PreOperation</class>
+        <class>Entities.Question</class>
+        <class>Entities.Service</class>
+        <class>Entities.TraitementActuel</class>
+        <class>Entities.ModeleQuestionnaire</class>
+        <class>Entities.Questionnaire</class>
+        <class>Entities.Keys.KeyDossierMedical</class>
+        <class>Entities.Keys.KeyModeleQuestionnaire</class>
+        <class>Entities.Keys.KeyQuestionnaire</class>
+        <properties>
+            <property name="hibernate.archive.autodetection" value="class"/>
+            <property name="hibernate.show_sql" value="true"/>
+            <property name="hibernate.format_sql" value="true"/>
+            <property name="hibernate.hbm2ddl.auto" value="update"/>
+            <property name="hibernate.transaction.jta.platform"
+                      value="org.hibernate.service.jta.platform.internal.SunOneJtaPlatform"/>
+        </properties>
+    </persistence-unit>
+</persistence>

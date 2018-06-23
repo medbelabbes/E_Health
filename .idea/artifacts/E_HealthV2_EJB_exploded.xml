@@ -1,0 +1,9 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-ejb" name="E_HealthV2:EJB exploded">
+    <output-path>$PROJECT_DIR$/out/artifacts/E_HealthV2_EJB_exploded</output-path>
+    <root id="root">
+      <element id="javaee-facet-resources" facet="E_HealthV2/ejb/EJB" />
+      <element id="module-output" name="E_HealthV2" />
+    </root>
+  </artifact>
+</component>

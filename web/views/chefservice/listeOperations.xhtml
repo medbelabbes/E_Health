@@ -1,0 +1,52 @@
+<ui:composition
+        xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:p="http://primefaces.org/ui">
+    <section>
+        <h:form>
+            
+
+
+        <p:dataTable id="tableStateDT" var="operation" value="#{operationController.operations}" widgetVar="operationsTable" multiViewState="true"
+                     rows="10"
+                      rowKey="#{operation.idoperation}"
+                     emptyMessage="No operation with given criteria" filteredValue="#{operationController.filteredoperations}">
+            <f:facet name="header">
+                <p:outputPanel>
+                    <h:outputText value="   Rechercher:" />
+                    <p:inputText id="globalFilter" onkeyup="PF('operationsTable').filter()" style="width:150px" placeholder="Enter keyword"/>
+                    <p:commandButton id="toggler" type="button"  style="float:right" icon="ui-icon-calculator" />
+                    <p:columnToggler datasource="tableStateDT" trigger="toggler" />
+                </p:outputPanel>
+            </f:facet>
+
+            <p:column headerText="N SALLE" sortBy="#{operation.numeroSalle}" filterMatchMode="contains">
+                <h:outputText value="#{operation.numeroSalle}"/>
+            </p:column>
+
+            <p:column headerText="Date" sortBy="#{operation.dateOperation}" filterMatchMode="contains">
+                <h:outputText value="#{operation.dateOperation}"/>
+            </p:column>
+            <p:column headerText="Medecin"  sortBy="Dr.#{operation.medecin.nom}  #{operation.medecin.prenom}" filterMatchMode="contains">
+
+                <h:outputText value="Dr.#{operation.medecin.nom}  #{operation.medecin.prenom}" />
+            </p:column>
+            <p:column headerText="Patient" sortBy="#{operation.patient.nom}  #{operation.patient.prenom}" filterMatchMode="lte">
+                <h:outputText value="#{operation.patient.nom}  #{operation.patient.prenom}"/>
+            </p:column>
+
+            <p:column headerText="Actions" style="text-align: center">
+
+                <h:commandLink value="Supprimer"
+                               onclick="if (!confirm('vous voulez vraiment supprimer cette operation')) return false"
+                               action="#{operationController.delete()}"
+                               />
+            </p:column>
+
+
+        </p:dataTable>
+        </h:form>
+    </section>
+</ui:composition>
+

@@ -1,0 +1,132 @@
+<ui:composition
+        xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:h="http://xmlns.jcp.org/jsf/html"
+        xmlns:p="http://primefaces.org/ui" xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <section >
+        <h:form>
+
+            <!--<p:growl id="growl" sticky="true" showDetail="true"/>-->
+
+            <p:wizard flowListener="#{patientWizard.onFlowProcess}" style="width: 100%;">
+                <p:tab id="personal" title="Personal"  >
+                    <p:panel header="Personal Details"  styleClass="col-md-12">
+                       
+                        <h:panelGrid columns="2" columnClasses="label, value" >
+                            <h:outputText value="Firstname: *" />
+                            <p:inputText value="#{patientWizard.patient.nom}" required="true" label="Firstname" />
+
+                            <h:outputText value="Lastname: *" />
+                            <p:inputText value="#{patientWizard.patient.prenom}" required="true" label="Lastname"/>
+
+                            <h:outputText value="Age: " />
+                            <p:inputText value="#{patientWizard.patient.age}" />
+                            <h:outputText value="Sexe: " />
+
+                            <p:selectOneMenu value="#{patientWizard.patient.sexe}">
+                                <f:selectItem itemLabel="masculin" itemValue="masculin" />
+                                <f:selectItem itemLabel="femenin" itemValue="femenin" />
+                            </p:selectOneMenu>
+                            <p:outputLabel for="effect" value="Date de naissance:" />
+                            <p:calendar id="effect" value="#{patientWizard.patient.dateNaissance}" effect="fold" />
+                            <h:outputText value="Lieu de naissance: " />
+                            <p:inputText value="#{patientWizard.patient.lieuNaissance}" />
+
+                            <h:outputText value="Numéro assurance social: " />
+                            <p:inputText value="#{patientWizard.patient.numeroAS}" />
+
+                            <h:outputText value="Skip to last: " />
+                            <h:selectBooleanCheckbox value="#{patientWizard.skip}" />
+                        </h:panelGrid>
+                    </p:panel>
+                </p:tab>
+                <p:tab id="contact" title="Contact">
+                    <p:panel header="Contact Information">
+                        
+                        <h:panelGrid columns="2" columnClasses="label, value">
+                            <h:outputText value="Email: *" />
+                            <p:inputText value="#{patientWizard.patient.email}" required="true" label="Email"/>
+
+                            <h:outputText value="Phone: " />
+                            <p:inputText value="#{patientWizard.patient.telephone}"/>
+                            <h:outputText value="Skip to last: " />
+                            <h:selectBooleanCheckbox value="#{patientWizard.skip}" />
+                              </h:panelGrid>
+                    </p:panel>
+                </p:tab>
+
+
+                <p:tab id="addressss" title="Address">
+                    <p:panel header="Address Details">
+                        
+                        <h:panelGrid columns="2" columnClasses="label, value">
+                            <h:outputText value="Street: " />
+                            <p:inputText value="#{patientWizard.adresse.rue}" />
+
+                            <h:outputText value="Postal Code: " />
+                            <p:inputText value="#{patientWizard.adresse.codePostale}" required="true"/>
+
+                            <h:outputText value="City: " />
+                            <p:inputText value="#{patientWizard.adresse.ville}" />
+
+                            <h:outputText value="Skip to last: " />
+                            <h:selectBooleanCheckbox value="#{patientWizard.skip}" />
+                        </h:panelGrid>
+                    </p:panel>
+                </p:tab>
+
+
+                <p:tab id="confirm" title="Confirmation">
+                    <p:panel header="Confirmation">
+                        <h:panelGrid id="confirmation" columns="3" columnClasses="grid,grid,grid">
+                            <h:panelGrid columns="2" columnClasses="label, value">
+                                <h:outputText value="Firstname: " />
+                                <h:outputText value="#{patientWizard.patient.nom}" styleClass="outputLabel" />
+
+                                <h:outputText value="Lastname: " />
+                                <h:outputText value="#{patientWizard.patient.prenom}" styleClass="outputLabel"/>
+
+                                <h:outputText value="Age: " />
+                                <h:outputText value="#{patientWizard.patient.age}" styleClass="outputLabel"/>
+                                <h:outputText value="Sexe: " />
+                                <h:outputText value="#{patientWizard.patient.sexe}" styleClass="outputLabel"/>
+                                <h:outputText value="Date de naissance: " />
+                                <h:outputText value="#{patientWizard.patient.dateNaissance}">
+                                    <f:convertDateTime pattern="MM/dd/yyyy" />
+                                </h:outputText>
+                            <h:outputText value="Lieu de naissance: " />
+                                <h:outputText value="#{patientWizard.patient.lieuNaissance}" />
+
+                            </h:panelGrid>
+
+                            <h:panelGrid columns="2" columnClasses="label, value">
+                                <h:outputText value="Street: " />
+                                <h:outputText value="#{patientWizard.patient.adresse.rue}" styleClass="outputLabel"/>
+
+                                <h:outputText value="Postal: " />
+                                <h:outputText value="#{patientWizard.patient.adresse.codePostale}" styleClass="outputLabel"/>
+
+                                <h:outputText value="City: " />
+                                <h:outputText value="#{patientWizard.patient.adresse.ville}" styleClass="outputLabel"/>
+                            </h:panelGrid>
+
+                            <h:panelGrid columns="2" columnClasses="label, value">
+                                <h:outputText value="Email: " />
+                                <h:outputText value="#{patientWizard.patient.email}" styleClass="outputLabel"/>
+
+                                <h:outputText value="Phone " />
+                                <h:outputText value="#{patientWizard.patient.telephone}" styleClass="outputLabel"/>
+
+
+                            </h:panelGrid>
+                        </h:panelGrid>
+
+                        <p:commandButton value="Submit" actionListener="#{patientWizard.save}"  process="@this"/>
+                    </p:panel>
+                </p:tab>
+            </p:wizard>
+
+        </h:form>
+
+    </section>
+</ui:composition>
+

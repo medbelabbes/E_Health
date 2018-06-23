@@ -1,0 +1,51 @@
+<ui:composition
+        xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:p="http://primefaces.org/ui">
+    <section>
+        <h:form>
+
+
+
+        <p:dataTable id="tableStateDT" var="patient" value="#{medecinController.patientListe}" widgetVar="patientsTable" multiViewState="true"
+                     rows="10"
+                     selectionMode="single" selection="#{medecinController.selectedPatient}" rowKey="#{patient.idPatient}"
+                     emptyMessage="No patient with given criteria" filteredValue="#{medecinController.filteredPatients}">
+            <f:facet name="header">
+                <p:outputPanel>
+                    <h:outputText value="   Rechercher:" />
+                    <p:inputText id="globalFilter" onkeyup="PF('patientsTable').filter()" style="width:150px" placeholder="Enter keyword"/>
+                    <p:commandButton id="toggler" type="button"  style="float:right" icon="ui-icon-calculator" />
+                    <p:columnToggler datasource="tableStateDT" trigger="toggler" />
+                </p:outputPanel>
+            </f:facet>
+
+            <p:column headerText="Nom" sortBy="#{patient.nom}" filterMatchMode="contains">
+                <h:outputText value="#{patient.nom}"/>
+            </p:column>
+
+            <p:column headerText="Prenom" sortBy="#{patient.prenom}" filterMatchMode="contains">
+                <h:outputText value="#{patient.prenom}"/>
+            </p:column>
+            <p:column headerText="Email"  sortBy="#{patient.email}" filterMatchMode="contains">
+
+                <h:outputText value="#{patient.email}" />
+            </p:column>
+            <p:column headerText="Date naissance" sortBy="#{patient.dateNaissance}" filterMatchMode="lte">
+                <h:outputText value="#{patient.dateNaissance}"/>
+            </p:column>
+            <p:column headerText="lieu naissance" sortBy="#{patient.lieuNaissance}" filterMatchMode="contains">
+
+                <h:outputText value="#{patient.lieuNaissance}" />
+            </p:column>
+            <p:column headerText="Telephone" sortBy="#{patient.telephone}" filterMatchMode="contains">
+                <h:outputText value="#{patient.telephone}" />
+            </p:column>
+
+
+        </p:dataTable>
+        </h:form>
+    </section>
+</ui:composition>
+
