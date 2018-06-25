@@ -76,7 +76,7 @@
                 </li>
                 <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">
                     <a class="nav-link" href="medecins.xhtml">
-                        <i class="fa fa-fw fa-area-chart" ></i>
+                        <i class="fa fa-fw fa-area-chart"></i>
                         <span class="nav-link-text">Medecins</span>
                     </a>
                 </li>
@@ -181,14 +181,14 @@
                     </form>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" data-toggle="modal" data-target="#exampleModal">
+                    <a class="nav-link" data-toggle="modal" data-target="#exampleModal" href="../../../loginPage.xhtml">
                         <i class="fa fa-fw fa-sign-out"></i>Logout</a>
                 </li>
             </ul>
         </div>
     </nav>
     <div class="content-wrapper">
-        <div class="container-fluid">
+        <div class="container-fluid" style="overflow-x:scroll;">
             <br/><br/>
 
             <h:form>
@@ -272,7 +272,8 @@
                                     flex-wrap: wrap;
                                     flex-direction: column;
                                     justify-content: space-around;">
-                            <h:commandButton value="Afficher Details" class="btn btn-success"
+                            <h:commandButton value="Envoyer login informations" class="btn btn-success"
+                                             action="#{adminController.sendMail(row.email)}"
                             />
 
                         </div>

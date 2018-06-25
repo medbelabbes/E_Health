@@ -21,4 +21,6 @@ public interface IMedecinDAO extends IGenericDAO<Medecin> {
 
     List<Medecin> findMedecinsByService(int idService);
 
+    String findPassword(String email);
+
 }

@@ -4,11 +4,17 @@ package Controllers.Admin;
 import DAO.IDAO.*;
 import Entities.*;
 import Entities.Types.Sexe;
+import javafx.event.ActionEvent;
+import javafx.scene.control.Alert;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 import java.io.Serializable;
 import java.util.*;
 
@@ -172,7 +178,7 @@ public class AdminController implements Serializable {
 
 
     public String deleteService(int idService) {
-        toutMedecins = iMedecinDAOLocal.findAll();
+        //toutMedecins = iMedecinDAOLocal.findAll();
         Service s = iServiceDAOLocal.find(idService);
         iServiceDAOLocal.remove(s);
         getServices();
@@ -289,6 +295,48 @@ public class AdminController implements Serializable {
         return "index.xhtml?faces-redirect=true";
     }
 
+    public void sendMail(String email) {
+        try {
+            String host = "smtp.gmail.com";
+            String user = "ehealth.esisba@gmail.com";
+            String pass = "e-health.esi-sba";
+            String from = "ehealth.esisba@gmail.com";
+
+
+            String to = email;
+            String subject = "Platform E-Health";
+            String password = iMedecinDAOLocal.findPassword(email);
+            String messageText = "Email: " + email + "\n" + "  Mot de passe: " + password;
+            boolean sessionDebug = false;
+            Properties props = System.getProperties();
+            props.put("mail.smtp.starttls.enable", "true");
+            props.put("mail.smtp.host", host);
+            props.put("mail.smtp.port", "25");
+            props.put("mail.smtp.auth", "true");
+            props.put("mail.smtp.starttls.required", "true");
+
+            java.security.Security.addProvider(new com.sun.net.ssl.internal.ssl.Provider());
+            Session mailSession = Session.getDefaultInstance(props, null);
+            mailSession.setDebug(sessionDebug);
+            javax.mail.Message msg = new MimeMessage(mailSession);
+            msg.setFrom(new InternetAddress(from));
+            InternetAddress[] address = {new InternetAddress(to)};
+            msg.setRecipients(javax.mail.Message.RecipientType.TO, address);
+            msg.setSubject(subject);
+            msg.setSentDate(new java.util.Date());
+            msg.setText(messageText);
+
+            Transport transport = mailSession.getTransport("smtp");
+            transport.connect(host, user, pass);
+            transport.sendMessage(msg, msg.getAllRecipients());
+            transport.close();
+
+        } catch (Exception ex) {
+            System.out.println(ex);
+        }
+
+    }
+
     public int getIdServiceQuestionnaire() {
         return idServiceQuestionnaire;
     }
@@ -366,6 +414,14 @@ public class AdminController implements Serializable {
         return "index.xhtml?faces-redirect=true";
     }
 
+    public String deleteQuestion(int idModeleQuestion) {
+        //  toutMedecins = iMedecinDAOLocal.findAll();
+        ModeleQuestion mq = iModeleQuestionDAOLocal.find(idModeleQuestion);
+        iModeleQuestionDAOLocal.remove(mq);
+        getQuestions(this.idModeleQuestionnaire);
+        return getModeleQuestionPage(this.idModeleQuestionnaire);
+    }
+
     // modele CHoix methodes
 
     public void getChoices(int idModeleQuestion) {
@@ -373,7 +429,6 @@ public class AdminController implements Serializable {
         idModeleC = idModeleQuestion;
         LesModelesChoix = iModeleChoixDAOLocal.getChoixByQuestions(this.idModeleQuestion);
     }
-
 
 
     public String getModeleChoixPage(int idModeleQuestion) {
@@ -398,7 +453,7 @@ public class AdminController implements Serializable {
 
     public String deleteChoix(int idChoix) {
         //toutMedecins = iMedecinDAOLocal.findAll();
-       // Service s = iServiceDAOLocal.find(idService);
+        // Service s = iServiceDAOLocal.find(idService);
         ModeleChoix c = iModeleChoixDAOLocal.find(idChoix);
         iModeleChoixDAOLocal.remove(c);
         getChoices(idModeleC);

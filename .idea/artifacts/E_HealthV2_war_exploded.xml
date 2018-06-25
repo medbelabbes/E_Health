@@ -12,6 +12,7 @@
           <element id="library" level="project" name="javax.faces" />
           <element id="library" level="project" name="abstract-jdbc-driver-0.5" />
           <element id="library" level="project" name="Java EE 6" />
+          <element id="library" level="project" name="org.apache.commons:commons-email:1.3" />
         </element>
       </element>
     </root>

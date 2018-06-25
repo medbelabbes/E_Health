@@ -182,7 +182,7 @@
                     </form>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" data-toggle="modal" data-target="#exampleModal">
+                    <a class="nav-link" data-toggle="modal" data-target="#exampleModal" href="../../../loginPage.xhtml">
                         <i class="fa fa-fw fa-sign-out"></i>Logout</a>
                 </li>
             </ul>
@@ -230,6 +230,7 @@
                                     justify-content: space-around;">
 
                             <h:commandButton value="Supprimer" class="btn btn-danger"
+                                             action="#{adminController.deleteQuestion(row.idModeleQuestion)}"
 
                             />
                             <h:commandButton value="Choix" class="btn btn-success"
@@ -241,7 +242,7 @@
                 </h:dataTable>
 
                 <p:outputLabel for="Question" value="Question: "/>
-                <h:inputText id="Question" value="#{adminController.question}"/>
+                <h:inputTextarea id="Question" value="#{adminController.question}"/>
 
                 <br/>
                 <br/>
